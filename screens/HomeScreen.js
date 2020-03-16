@@ -1,22 +1,60 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import MapView from 'react-native-maps';
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
 
 import { MonoText } from '../components/StyledText';
 
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+export default class HomeScreen extends Component {
+  state = {
+    location: null,
+    errorMessage: null,
+  };
 
-         <MapView style={styles.mapStyle} />
+  constructor(props) {
+    super(props);
+    this._getLocationAsync();
+  }
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
 
-      </ScrollView>
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({ location });
+  }
 
-    </View>
-  );
+  render() {
+    let text = 'Waiting..';
+    if (this.state.errorMessage) {
+      text = this.state.errorMessage;
+    } else if (this.state.location) {
+      text = JSON.stringify(this.state.location);
+    }
+
+
+    return (
+      <View style={styles.container}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+
+           <MapView style={styles.mapStyle} initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          }} />
+
+        </ScrollView>
+
+      </View>
+    );
+  }
 }
 
 HomeScreen.navigationOptions = {
