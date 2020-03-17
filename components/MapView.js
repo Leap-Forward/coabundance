@@ -9,7 +9,6 @@ const MyMapView = (props) => {
             showsUserLocation={true}
             onRegionChange={(reg) => props.onRegionChange(reg)}>
 
-            <Marker coordinate={props.region} />
         </MapView>
     )
 }

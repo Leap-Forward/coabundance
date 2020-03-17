@@ -67,13 +67,12 @@ class MapContainer extends React.Component {
                     />
                 </View>
 
-                {
-                    this.state.region['latitude'] ?
-                        <View style={{ flex: 1 }}>
-                            <MyMapView
-                                region={this.state.region}
-                                onRegionChange={(reg) => this.onMapRegionChange(reg)} />
-                        </View> : null}
+                {this.state.region['latitude'] ?
+                  <View style={{ flex: 10 }}>
+                      <MyMapView
+                          region={this.state.region}
+                          onRegionChange={(reg) => this.onMapRegionChange(reg)} />
+                  </View> : null}
             </View>
         );
     }
