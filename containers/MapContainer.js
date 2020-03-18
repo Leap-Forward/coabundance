@@ -2,8 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import MapInput from '../components/MapInput';
 import MyMapView from '../components/MapView';
-import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
+import { getLocation, geocodeLocationByName } from '../services/location-service';
 
 class MapContainer extends React.Component {
     state = {
@@ -14,28 +13,28 @@ class MapContainer extends React.Component {
       super(props);
     }
 
-    _getLocationAsync = async () => {
-      let { status } = await Permissions.askAsync(Permissions.LOCATION);
-      if (status !== 'granted') {
-        return {errorMessage: 'Permission to access location was denied'};
-      }
+    // _getLocationAsync = async () => {
+    //   let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    //   if (status !== 'granted') {
+    //     return {errorMessage: 'Permission to access location was denied'};
+    //   }
 
-      let location = await Location.getCurrentPositionAsync({});
-      return location;
-    }    
+    //   let location = await Location.getCurrentPositionAsync({});
+    //   return location;
+    // }    
 
     componentDidMount() {
         this.getInitialState();
     }
 
     getInitialState() {
-      this._getLocationAsync().then(
+        getLocation().then(
             (data) => {
                 console.log(data);
                 this.setState({
                     region: {
-                        latitude: data.coords.latitude,
-                        longitude: data.coords.longitude,
+                        latitude: data.latitude,
+                        longitude: data.longitude,
                         latitudeDelta: 0.003,
                         longitudeDelta: 0.003
                     }
@@ -56,7 +55,7 @@ class MapContainer extends React.Component {
     }
 
     onMapRegionChange(region) {
-        this.setState({ region });
+        // this.setState({ region });
     }
 
     render() {
