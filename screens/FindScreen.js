@@ -3,10 +3,8 @@ import { View, StyleSheet } from 'react-native';
 import MapContainer from '../containers/MapContainer';
 import Constants from 'expo-constants';
 
-export default class HomeScreen extends Component {
+export default class FindScreen extends Component {
   state = {
-    location: null,
-    errorMessage: null,
   };
 
   constructor(props) {
@@ -23,7 +21,7 @@ export default class HomeScreen extends Component {
   }
 }
 
-HomeScreen.navigationOptions = {
+FindScreen.navigationOptions = {
   header: null,
 };
 
