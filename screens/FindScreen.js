@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, StyleSheet } from 'react-native';
 import MapContainer from '../containers/MapContainer';
 import Constants from 'expo-constants';
 
-export default class FindScreen extends Component {
+export default class FindScreen extends PureComponent {
   state = {
   };
 

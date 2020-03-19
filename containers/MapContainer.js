@@ -7,7 +7,7 @@ import {
   geocodeLocationByName,
 } from '../services/location-service';
 
-class MapContainer extends React.Component {
+class MapContainer extends React.PureComponent {
   state = {
     region: {}
   };
@@ -45,7 +45,6 @@ class MapContainer extends React.Component {
   }
 
   placeSelected(result) {
-    console.log(result);
     const { result: place } = result;
     const {
       geometry: {
@@ -61,6 +60,9 @@ class MapContainer extends React.Component {
         longitudeDelta: 0.003
       }
     });
+    if (this.props.onPlaceSelection) {
+      this.props.onPlaceSelection(place);
+    }
   }
 
   onMapRegionChange(region) {

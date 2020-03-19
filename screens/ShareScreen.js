@@ -1,27 +1,38 @@
-import React, { Component } from 'react';
+import React, {Modal, Text, PureComponent } from 'react';
 import { View, StyleSheet } from 'react-native';
 import MapContainer from '../containers/MapContainer';
 import Constants from 'expo-constants';
 
-export default class FindScreen extends Component {
+export default class ShareScreen extends PureComponent {
   state = {
+    modalVisible: false
   };
 
   constructor(props) {
     super(props);
   }
  
+  showModal(visible) {
+      this.setState({ modalVisible: visible });
+  }
+
+  placeSelected(place) {
+    console.log(place);
+    this.showModal(true);
+  }
 
   render() {
     return (
+   
       <View style={styles.container}>
-        <MapContainer />
+        <MapContainer onPlaceSelection={place => this.placeSelected(place)} />
       </View>
+      
     );
   }
 }
 
-FindScreen.navigationOptions = {
+ShareScreen.navigationOptions = {
   header: null,
 };
 
