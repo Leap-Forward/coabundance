@@ -9,7 +9,7 @@ function MapInput(props){
         placeHolder={"Search"}
         language={"en-US"}
         onSelect={place => {
-            this.props.goToPoint(get(place, 'result.geometry.location.lat'), get(place, 'result.geometry.location.lng'))
+            props.placeSelected(place)
         }}
     />
   );
