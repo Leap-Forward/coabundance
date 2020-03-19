@@ -61,13 +61,13 @@ class MapContainer extends React.Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, zIndex: 1 }}>
                     <MapInput notifyChange={(loc) => this.getCoordsFromName(loc)}
                     />
                 </View>
 
                 {this.state.region['latitude'] ?
-                  <View style={{ flex: 10 }}>
+                  <View style={{ flex: 7, zIndex: 0  }}>
                       <MyMapView
                           region={this.state.region}
                           onRegionChange={(reg) => this.onMapRegionChange(reg)} />

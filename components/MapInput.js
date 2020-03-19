@@ -1,25 +1,16 @@
 import React from 'react';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import PlacesInput from 'react-native-places-input';
 
 function MapInput(props){
   return (
-      <GooglePlacesAutocomplete
-        placeholder='Search'
-        minLength={2} // minimum length of text to search
-        autoFocus={true}
-        returnKeyType={'search'} // Can be left out for default return key 
-        listViewDisplayed={false}    // true/false/undefined
-        fetchDetails={true}
-        onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-            props.notifyChange(details.geometry.location);
+    <PlacesInput
+        googleApiKey={'AIzaSyC0N-w9QA1O9CVqJnA45N-4L7aca_7IxDE'}
+        placeHolder={"Search"}
+        language={"en-US"}
+        onSelect={place => {
+            this.props.goToPoint(get(place, 'result.geometry.location.lat'), get(place, 'result.geometry.location.lng'))
         }}
-        query={{
-            key: 'YOUR_API_KEY_HERE',
-            language: 'en'
-        }}
-        nearbyPlacesAPI='GooglePlacesSearch'
-        debounce={300}
-      />
+    />
   );
 }
 export default MapInput;
