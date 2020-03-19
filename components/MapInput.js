@@ -1,10 +1,11 @@
 import React from 'react';
-import PlacesInput from 'react-native-places-input';
+import PlaceSearch from './PlaceSearch.js';
+import ENV from '../env';
 
 function MapInput(props){
   return (
-    <PlacesInput
-        googleApiKey={'AIzaSyC0N-w9QA1O9CVqJnA45N-4L7aca_7IxDE'}
+    <PlaceSearch
+        googleApiKey={ENV.GOOGLE_API_KEY}
         placeHolder={"Search"}
         language={"en-US"}
         onSelect={place => {
