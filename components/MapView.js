@@ -1,15 +1,12 @@
 import React from 'react';
-import MapView,{ Marker } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
-const MyMapView = (props) => {
-    return (
-        <MapView
-            style={{ flex: 1 }}
-            region={props.region}
-            showsUserLocation={true}
-            onRegionChange={(reg) => props.onRegionChange(reg)}>
-
-        </MapView>
-    )
-}
+const MyMapView = props => (
+  <MapView
+    style={{ flex: 1 }}
+    region={props.region}
+    showsUserLocation
+    onRegionChange={reg => props.onRegionChange(reg)}
+  />
+);
 export default MyMapView;
